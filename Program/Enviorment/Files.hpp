@@ -13,11 +13,11 @@ namespace Enviorment
     class file{
         protected:
             // peak into the binary contents of the file
+            // std::string_view
         public:
             file();
             ~file();
             void readFile(std::string fileName);
-            void writeFile(std::string fileName);
     };
 } // namespace Enviorment
 

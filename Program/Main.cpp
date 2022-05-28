@@ -3,23 +3,24 @@
 
 #include <iostream>
 #include <string>
+
+// simple class to parse arguments from the command line, with support for long and short names
 #include "arguments.h"
-
-
+#include "Enviorment/Files.hpp"
 
 int main(int argc, char** argv){
     parser args(argc, argv);
 
-    args.addArg("help", "--help", "-h", false);
-    args.addArg("file", "--file", "-f", true);
+    args.addArg("file", "--file", "-f", false);
+    args.addArg("directory", "--directory", "-d", false);
 
+    // arg.getArgValues("file") returns a vector of all the values for the argument "file" 
+    // function now works!
     if (args.checkArg("file")){
-        args.getArgValues("file");
+        
+    } 
+    if (!args.checkArg("directory") && !args.checkArg("file")) {
+        printf("Error: no specified file or directory. (hint: pass -f or -d)\n");
     }
-    
     return 0;
 }
-
-// TODO: work on argument parsing
-// UPDATE: it can find arguments
-// UPDATE: it can find values for arguments

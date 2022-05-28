@@ -53,8 +53,6 @@ std::vector<char*> parser::getArgValues(std::string arg_name){
             _arg_index = i += (_argv[i+1] == nullptr ? 0 : 1);
         } 
     }
-
-    // zap.out -f one two -d three four
     for (int i = _arg_index;i < _argc; i++){
         if  (_argv[i][0] != '-') _tmp_values.push_back(_argv[i]);
         if  (_argv[i][0] == '-') return _tmp_values;

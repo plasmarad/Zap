@@ -14,8 +14,6 @@ int main(int argc, char** argv){
     args.addArg("file", "--file", "-f", false);
     args.addArg("directory", "--directory", "-d", false);
 
-    // arg.getArgValues("file") returns a vector of all the values for the argument "file" 
-    // function now works!
     if (args.checkArg("file")){
         
     } 

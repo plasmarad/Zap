@@ -1,7 +1,6 @@
 #include "Files.hpp"
 #include <fstream>
 
-
 namespace Enviorment{
     file::file(std::string directory){
         _directory = directory;

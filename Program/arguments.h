@@ -26,7 +26,6 @@ class parser{
         char** _argv; int _argc;
         std::vector <arg> _ARGS;
         std::string _format(char* argv);
-        // reference to the arg object
         arg _getArg(std::string arg_name);
     public:
         parser(int argc, char** argv);

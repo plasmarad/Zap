@@ -17,5 +17,3 @@ $import [path: "{Zap}/IO.zap"]
 
     [return: temp]
 }
-
-//TODO: Write Fibonacci

@@ -1,22 +1,13 @@
 #ifndef __LEXER_HPP__
 #define __LEXER_HPP__
 
-#include <Token.h>
+#include <Language/Token.h>
+#include <vector>
 
 namespace lexer
 {
-    class lexer
-    {
-        public:
-            lexer(std::string input);
-            ~lexer();
-            Token* nextToken();
-        private:
-            std::string input;
-            int currentPosition;
-            int readPosition;
-            char peekChar();
-    };
+    // function that returns tokens
+    std::vector<Token> Lex(std::string _data);
 } // namespace lexer
 
 

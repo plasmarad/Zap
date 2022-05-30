@@ -1,6 +1,5 @@
 #include "arguments.h"
 
-
 parser::parser(int argc, char** argv){
     _argv = argv; _argc = argc;
 }    

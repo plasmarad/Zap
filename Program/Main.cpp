@@ -1,6 +1,3 @@
-// #include <Enviorment/Files.hpp>
-// -I.
-
 #include <iostream>
 #include <string>
 
@@ -9,18 +6,29 @@
 #include "Enviorment/Files.hpp"
 
 int main(int argc, char** argv){
+    // argument parser
     parser args(argc, argv);
 
-    args.addArg("file", "--file", "-f", false);
-    args.addArg("directory", "--directory", "-d", false);
+    args.addArg("file",         "--file",       "-f",     false);
+    args.addArg("enviorment",   "--enviorment", "-env",   false);
 
-    // arg.getArgValues("file") returns a vector of all the values for the argument "file" 
-    // function now works!
+    // pass individual files
     if (args.checkArg("file")){
+        Enviorment::_workflow _WorkFlow;
         
-    } 
-    if (!args.checkArg("directory") && !args.checkArg("file")) {
-        printf("Error: no specified file or directory. (hint: pass -f or -d)\n");
+        for (std::string ite: args.getArgValues("file")){
+            _WorkFlow << Enviorment::file(ite);
+            
+        }
+    }
+
+    // pass a directory
+    if (args.checkArg("enviorment")){
+        Enviorment::Enviorment _ENV = Enviorment::Enviorment(args.getArgValues("enviorment")[0]);
+
+    }
+    if (!args.checkArg("enviorment") && !args.checkArg("file")) {
+        printf("Error: no specified file or directory. (hint: pass -f or -env)\n");
     }
     return 0;
 }

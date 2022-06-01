@@ -5,7 +5,7 @@
 
 enum class TokenType
 {
-    Symbol, // symbol like a name
+    Symbol, // symbol like a name, symbols can be letterss
     Number, // Integer or floating point number
     String, // String literal
     

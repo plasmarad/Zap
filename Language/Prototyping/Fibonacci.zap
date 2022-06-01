@@ -2,7 +2,7 @@ $import [path: "{Zap}/IO.zap"]
 
 [main] {
 
-    IO.print("{fibonacci}");
+    IO.print("${fibonacci}");
     
 
     [return: 0]
@@ -17,5 +17,3 @@ $import [path: "{Zap}/IO.zap"]
 
     [return: temp]
 }
-
-//TODO: Write Fibonacci

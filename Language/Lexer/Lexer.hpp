@@ -10,5 +10,6 @@ namespace lexer
     std::vector<Token> Lex(std::string _data);
 } // namespace lexer
 
+#include "Lexer.cpp"
 
 #endif

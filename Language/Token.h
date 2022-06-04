@@ -16,6 +16,7 @@ enum class TokenType
     Minus,              // -
     Asterisk,           // *
     Slash,              // /
+    Period,             // .
 
     OpenBracket,        // [
     CloseBracket,       // ]
@@ -27,11 +28,11 @@ enum class TokenType
 };
 
 class Token{
-    private:
+    public:
         TokenType type;
         std::string value;
-    public:
-        Token(TokenType type, std::string value): type(type), value(value) {};
+    
+        Token(std::string value, TokenType type): type(type), value(value) {};
 };
 
 #endif

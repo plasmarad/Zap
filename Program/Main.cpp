@@ -4,6 +4,8 @@
 // simple class to parse arguments from the command line, with support for long and short names
 #include "arguments.h"
 #include "Enviorment/Files.hpp"
+// actual lexing process
+#include <Language/Lexer/Lexer.hpp>
 
 int main(int argc, char** argv){
     // argument parser
@@ -14,11 +16,8 @@ int main(int argc, char** argv){
 
     // pass individual files
     if (args.checkArg("file")){
-        Enviorment::_workflow _WorkFlow;
-        
         for (std::string ite: args.getArgValues("file")){
-            _WorkFlow << Enviorment::file(ite);
-            
+            lexer::Lex(Enviorment::file(ite).readFile());
         }
     }
 
@@ -32,3 +31,4 @@ int main(int argc, char** argv){
     }
     return 0;
 }
+// TODO: add strings to lexer

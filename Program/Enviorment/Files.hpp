@@ -4,7 +4,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <Language/Lexer/Lexer.hpp>
 
 
 namespace Enviorment
@@ -19,17 +18,9 @@ namespace Enviorment
             ~file();
             std::string readFile();
     };
-    
-    class _workflow{
-        std::vector<file> _fls;
-        public:
-            void operator<<(file);
-    };
 
     // Manages files and aswell as building projects
     class Enviorment {
-        _workflow _env;
-        
         public:
             // initialize and setup an enviorment
             // it will also scan the directory for files

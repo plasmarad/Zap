@@ -20,11 +20,6 @@ namespace Enviorment{
     }    
 }
 
-namespace Enviorment {
-    void _workflow::operator<<(file){
-
-    };
-}
 
 Enviorment::Enviorment::Enviorment(std::string _ENV_DIR){
     

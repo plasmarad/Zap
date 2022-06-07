@@ -2,18 +2,19 @@ $import [path: "{Zap}/IO.zap"]
 
 [main] {
 
-    IO.print("${fibonacci}");
-    
+    for ([int] ite in Fibonacci(10)){
+        println("%i", ite);
+    }
 
     [return: 0]
 }
 
-[function: array(int) ] Fibonacci: [int] terms{
-    [array(int):] temp  // create an array with no defined size, it changes dynamically
+[array: int, ?] Fibonacci ([int] term){
+    [static; array: int, ?] _temp;
 
-    for ([int] i = 1; i <= n; i++){
-        temp[i+1] = temp[i] + temp[i-1]
+    for ([int] i = 1; i <= term; i++) {
+        _temp[i+1] = _temp[i] + _temp[i-1];
     }
 
-    [return: temp]
+    [return: _temp]
 }

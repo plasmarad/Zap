@@ -46,6 +46,32 @@ namespace lexer
                         __stmp.clear();
                     }
                     break;
+                case '\"':
+
+                    {
+                    ite+=1;
+                    while (ReturnChar(_data, ite) != '\"'){
+                        __stmp += _data[ite];
+                        if (ReturnChar(_data, ite+1) == '\\'){
+                            if (ReturnChar(_data, ite+2) == '\"'){
+                                __stmp += "\"";
+                                ite+=2;
+                            }
+                            if (ReturnChar(_data, ite+2) == '\\'){
+                                __stmp += "\\";
+                                ite+=2;
+                            }
+                            if (ReturnChar(_data, ite+2) == '\n'){
+                                __stmp += "\n";
+                                ite+=2;
+                            }
+                        }
+                        ite++;
+
+                    }
+                    __tmp.push_back(Token(__stmp, TokenType::String));
+                    }
+                    break;
                 default:
                     break;
             }

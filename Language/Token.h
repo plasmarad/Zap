@@ -13,18 +13,21 @@ enum class TokenType
     // Operators
     Plus,               // +
     Equal,              // =
-    Minus,              // -
+    Dash,              // -
     Asterisk,           // *
     Slash,              // /
     Period,             // .
+    Modifier,           //modifier: colon 
+    CompilerDirective,  //compiler handle: $
+    EOE,                // end of expression: ; (semicolon)
+
 
     OpenBracket,        // [
     CloseBracket,       // ]
     OpenBrace,          // {
     CloseBrace,         // }
-    Modifier,           //modifier: colon 
-    CompilerDirective,  //compiler handle: $
-
+    
+    Comma
 };
 
 class Token{

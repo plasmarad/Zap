@@ -47,37 +47,66 @@ namespace lexer
                     }
                     break;
                 case '\"':
-
-                    {
                     ite+=1;
+                    {
                     while (ReturnChar(_data, ite) != '\"'){
-                        __stmp += _data[ite];
-                        if (ReturnChar(_data, ite+1) == '\\'){
-                            if (ReturnChar(_data, ite+2) == '\"'){
-                                __stmp += "\"";
-                                ite+=2;
-                            }
-                            if (ReturnChar(_data, ite+2) == '\\'){
-                                __stmp += "\\";
-                                ite+=2;
-                            }
-                            if (ReturnChar(_data, ite+2) == '\n'){
-                                __stmp += "\n";
-                                ite+=2;
-                            }
+                        // check for escape sequence
+                        if (ReturnChar(_data, ite) == '\\' && ReturnChar(_data, ite+1) == '\"'){
+                            __stmp += '\"';
+                            ite+=2;
                         }
-                        ite++;
-
+                        __stmp += _data[ite];
+                        ite+=1;
+                        // deal with escape sequences in a OOP manner, and not during lexing
                     }
                     __tmp.push_back(Token(__stmp, TokenType::String));
+                    __stmp.clear();
                     }
+                    break;
+                case ',':
+                    __tmp.push_back(Token(",", TokenType::Comma));
+                    break;
+                case '+':
+                    __tmp.push_back(Token("+", TokenType::Plus));
+                    break;
+                case '-':
+                    __tmp.push_back(Token("-", TokenType::Dash));
+                    break;
+                case '*':
+                    __tmp.push_back(Token("*", TokenType::Asterisk));
+                    break;
+                case '/':
+                    __tmp.push_back(Token("/", TokenType::Slash));
+                    break;
+                case '[':
+                    __tmp.push_back(Token("[", TokenType::OpenBracket));
+                    break;
+                case ']':
+                    __tmp.push_back(Token("]", TokenType::CloseBracket));
+                    break;
+                case '{':
+                    __tmp.push_back(Token("{", TokenType::OpenBrace));
+                    break;
+                case '}':
+                    __tmp.push_back(Token("}", TokenType::CloseBrace));
+                    break;
+                case ':':
+                    __tmp.push_back(Token(":", TokenType::Modifier));
+                    break;
+                case '$':
+                    __tmp.push_back(Token("$", TokenType::CompilerDirective));
+                    break;
+                case ' ':
+                    break;
+                case ';':
+                    __tmp.push_back(Token(";", TokenType::EOE));
                     break;
                 default:
                     break;
             }
         }
         for (Token ite: __tmp){
-            printf("%i %s\n", ite.type, ite.value.c_str());
+            printf("%i %s\n", (int) ite.type, ite.value.c_str());
         }
         return __tmp;
     }

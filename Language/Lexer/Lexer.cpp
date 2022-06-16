@@ -1,7 +1,7 @@
 #include "Lexer.hpp"
 #include <iostream>
 
-// EXTRAS:
+// ================================================================================================
 char ReturnChar(std::string str, size_t index){
     if (index >= str.length() || str[index] == '\0'){
         return '\0';
@@ -11,7 +11,20 @@ char ReturnChar(std::string str, size_t index){
 bool withinRange(size_t index, size_t start, size_t end){
     return index >= start && index < end;
 }
+// use a map to store keywords and their token types
+void Identifier_detect_keyword(std::vector<Token> &ref, std::string _buffered_string){
+    //iterate through the map and if no keyword is found, create a new token with the type of Identifier
+    for (auto &keyword : keyword_map){
+        if (_buffered_string == keyword.first){
+            ref.push_back(Token(_buffered_string,keyword.second));
+            return;
+        }
+    }
+    ref.push_back(Token(_buffered_string, TokenType::Identifier));
 
+}
+
+// ================================================================================================
 
 namespace lexer
 {
@@ -24,9 +37,12 @@ namespace lexer
                 case '_':
                 case 'a'...'z':
                 case 'A'...'Z':
+                    //TODO: add support for numbers inside of variables by checking: if (isdigit(_data[ite+1]))
+                    // example: hell0
                     if (!withinRange((size_t) ReturnChar(_data, ite+1), 'a', 'z') && !withinRange((size_t) ReturnChar(_data, ite+1), 'A', 'Z')){
                         __stmp += _data [ite];
-                        __tmp.push_back(Token(__stmp, TokenType::Symbol));
+                        // find if it is a keyword and push back the token accordingly
+                        Identifier_detect_keyword(__tmp, __stmp);
                         __stmp.clear();
                     }
                     else{
@@ -105,9 +121,8 @@ namespace lexer
                     break;
             }
         }
-        for (Token ite: __tmp){
-            printf("%i %s\n", (int) ite.type, ite.value.c_str());
-        }
+        
+
         return __tmp;
     }
 } // namespace lexer

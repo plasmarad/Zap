@@ -37,8 +37,6 @@ namespace lexer
                 case '_':
                 case 'a'...'z':
                 case 'A'...'Z':
-                    //TODO: add support for numbers inside of variables by checking: if (isdigit(_data[ite+1]))
-                    // example: hell0
                     if (!withinRange((size_t) ReturnChar(_data, ite+1), 'a', 'z') && !withinRange((size_t) ReturnChar(_data, ite+1), 'A', 'Z')){
                         __stmp += _data [ite];
                         // find if it is a keyword and push back the token accordingly
@@ -51,7 +49,7 @@ namespace lexer
                     break;
                 case '.':
                     if (!withinRange((size_t) ReturnChar(_data, ite-1), '0', '9') && !withinRange((size_t) ReturnChar(_data, ite+1), '0', '9')){
-                        __tmp.push_back(Token( ".", TokenType::Period));
+                        __tmp.push_back(Token( "", TokenType::Period));
                         __stmp.clear();
                         break;
                     }
@@ -80,48 +78,116 @@ namespace lexer
                     }
                     break;
                 case ',':
-                    __tmp.push_back(Token(",", TokenType::Comma));
+                    __tmp.push_back(Token("", TokenType::Comma));
                     break;
                 case '+':
-                    __tmp.push_back(Token("+", TokenType::Plus));
+                    __tmp.push_back(Token("", TokenType::Plus));
                     break;
                 case '-':
-                    __tmp.push_back(Token("-", TokenType::Dash));
+                    __tmp.push_back(Token("", TokenType::Dash));
                     break;
                 case '*':
-                    __tmp.push_back(Token("*", TokenType::Asterisk));
+                    __tmp.push_back(Token("", TokenType::Asterisk));
                     break;
                 case '/':
-                    __tmp.push_back(Token("/", TokenType::Slash));
+                    __tmp.push_back(Token("", TokenType::Slash));
                     break;
                 case '[':
-                    __tmp.push_back(Token("[", TokenType::OpenBracket));
+                    __tmp.push_back(Token("", TokenType::OpenBracket));
                     break;
                 case ']':
-                    __tmp.push_back(Token("]", TokenType::CloseBracket));
+                    __tmp.push_back(Token("", TokenType::CloseBracket));
                     break;
                 case '{':
-                    __tmp.push_back(Token("{", TokenType::OpenBrace));
+                    __tmp.push_back(Token("", TokenType::OpenBrace));
                     break;
                 case '}':
-                    __tmp.push_back(Token("}", TokenType::CloseBrace));
+                    __tmp.push_back(Token("", TokenType::CloseBrace));
                     break;
                 case ':':
-                    __tmp.push_back(Token(":", TokenType::Modifier));
+                    __tmp.push_back(Token("", TokenType::Modifier));
                     break;
                 case '$':
-                    __tmp.push_back(Token("$", TokenType::CompilerDirective));
-                    break;
-                case ' ':
+                    __tmp.push_back(Token("", TokenType::CompilerDirective));
                     break;
                 case ';':
-                    __tmp.push_back(Token(";", TokenType::EOE));
+                    __tmp.push_back(Token("", TokenType::EOE));
+                    break;
+                case '!':
+                    if (ReturnChar(_data, ite+1) == '='){
+                        __tmp.push_back(Token("", TokenType::NotEqual));
+                        ite+=1;
+                    }
+                    else{
+                        __tmp.push_back(Token("", TokenType::Not));
+                    }
+                    break;
+                case '=':
+                    if (ReturnChar(_data, ite+1) == '='){
+                        __tmp.push_back(Token("", TokenType::Equals));
+                        ite+=1;
+                    }
+                    else{
+                        __tmp.push_back(Token("", TokenType::Assign));
+                    }
+                    break;
+                case '<':
+                    if (ReturnChar(_data, ite+1) == '='){
+                        __tmp.push_back(Token("", TokenType::LessThanEqual));
+                        ite+=1;
+                    }
+                    else{
+                        __tmp.push_back(Token("", TokenType::LessThan));
+                    }
+                    break;
+                case '>':
+                    if (ReturnChar(_data, ite+1) == '='){
+                        __tmp.push_back(Token("", TokenType::GreaterThanEqual));
+                        ite+=1;
+                    }
+                    else{
+                        __tmp.push_back(Token("", TokenType::GreaterThan));
+                    }
+                    break;
+                case '&':
+                    if (ReturnChar(_data, ite+1) == '&'){
+                        __tmp.push_back(Token("", TokenType::And));
+                        ite+=1;
+                    }
+                    else{
+                        __tmp.push_back(Token("", TokenType::Ampersand));
+                    }
+                    break;
+                case '|':
+                    if (ReturnChar(_data, ite+1) == '|'){
+                        __tmp.push_back(Token("", TokenType::Or));
+                        ite+=1;
+                    }
+                    else{
+                        __tmp.push_back(Token("", TokenType::Pipe));
+                    }
+                    break;
+                case '%':
+                    __tmp.push_back(Token("", TokenType::Modulus));
+                    break;
+                case '^':
+                    __tmp.push_back(Token("", TokenType::Caret));
+                    break;
+                case '?':
+                    __tmp.push_back(Token("", TokenType::Question));
+                    break;
+                case '~':
+                    __tmp.push_back(Token("", TokenType::Tilde));
+                    break;
+                case ' ':
                     break;
                 default:
                     break;
             }
         }
-        
+        for (auto &token : __tmp){
+            std::cout << (int) token.type << "\t"  << token.value << " " << std::endl;
+        }
 
         return __tmp;
     }

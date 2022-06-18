@@ -26,6 +26,7 @@ enum class TokenType
     Number, // Integer or floating point number
     String, // String literal
 
+    // Keywords
     Keyword_None,
     Keyword_If,
     Keyword_Else,
@@ -36,16 +37,32 @@ enum class TokenType
     Keyword_Continue,
     Keyword_Class,
     Keyword_Include,
-
-    
+    Keyword_Public,
+    Keyword_Private,
 
     // Operators
     Plus,               // +
-    Equal,              // =
-    Dash,              // -
+    Assign,             // =
+    Dash,               // -
     Asterisk,           // *
     Slash,              // /
     Period,             // .
+    Not,                // !
+    At,                 // @
+    Modulus,            // %
+    Caret,              // ^
+    Ampersand,          // &
+    GreaterThan,        // >
+    LessThan,           // <
+    LessThanEqual,      // <=
+    GreaterThanEqual,   // >=
+    Equals,             // ==
+    NotEqual,           // !=
+    Question,           // ?
+    Tilde,              // ~
+    Pipe,
+    Or,
+    And,
     Modifier,           //modifier: colon 
     CompilerDirective,  //compiler handle: $
     EOE,                // end of expression: ; (semicolon)
@@ -56,10 +73,13 @@ enum class TokenType
     OpenBrace,          // {
     CloseBrace,         // }
     
-    Comma
+    Comma,
+    Comment
     
 };
 
+// maps the token type to the string representation of the token type
+// for easier lookup later on
 std::map <std::string, TokenType> keyword_map = {
     { KEYWORD_IF,        TokenType::Keyword_If       },
     { KEYWORD_ELSE,      TokenType::Keyword_Else     },
@@ -70,7 +90,9 @@ std::map <std::string, TokenType> keyword_map = {
     { KEYWORD_CONTINUE,  TokenType::Keyword_Continue },
     { KEYWORD_CLASS,     TokenType::Keyword_Class    },
     { KEYWORD_NONE,      TokenType::Keyword_None     },
-    { KEYWORD_INCLUDE,   TokenType::Keyword_Include  }
+    { KEYWORD_INCLUDE,   TokenType::Keyword_Include  },
+    { KEYWORD_PUBLIC ,   TokenType::Keyword_Public   },
+    { KEYWORD_PRIVATE,   TokenType::Keyword_Private  }
 };
 
 class Token{
